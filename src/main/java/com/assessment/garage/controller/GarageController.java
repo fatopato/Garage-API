@@ -7,6 +7,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -19,19 +20,21 @@ public class GarageController {
     GarageService garageService;
 
     @PostMapping("/parkVehicle")
-    public BaseResponse parkVehicle(@RequestBody VehicleDto dto) {
+    public BaseResponse parkVehicle(@Validated @RequestBody VehicleDto dto) {
         try {
             return new BaseResponse(garageService.parkVehicle(dto), "", HttpStatus.OK);
         }catch (Exception e) {
+            log.error(e.getMessage());
             return new BaseResponse(null, e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/leaveVehicle")
-    public BaseResponse leaveVehicle(@RequestBody VehicleDto dto) {
+    public BaseResponse leaveVehicle(@Validated @RequestBody VehicleDto dto) {
         try {
             return new BaseResponse(garageService.leaveVehicle(dto), "", HttpStatus.OK);
         }catch (Exception e) {
+            log.error(e.getMessage());
             return new BaseResponse(null, e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
@@ -41,6 +44,7 @@ public class GarageController {
         try {
             return new BaseResponse(garageService.status(), "", HttpStatus.OK);
         }catch (Exception e) {
+            log.error(e.getMessage());
             return new BaseResponse(null, e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }

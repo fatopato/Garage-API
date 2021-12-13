@@ -22,12 +22,12 @@ public class SlotController {
     @NonNull CustomMapper customMapper;
 
     @PostMapping(value = "")
-    public SlotDto create(SlotDto slot) {
+    public SlotDto create(@RequestBody SlotDto slot) {
        return customMapper.toDto(slotService.save(customMapper.toEntity(slot)));
     }
 
     @PutMapping(value = "")
-    public SlotDto update(SlotDto slotDto) {
+    public SlotDto update(@RequestBody SlotDto slotDto) {
        return slotService.update(customMapper.toEntity(slotDto)).map(customMapper::toDto).orElse(null);
     }
 

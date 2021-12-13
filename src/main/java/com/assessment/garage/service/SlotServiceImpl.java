@@ -5,6 +5,7 @@ import com.assessment.garage.entity.enums.SlotStatus;
 import com.assessment.garage.repository.SlotRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Synchronized;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -42,6 +43,7 @@ public class SlotServiceImpl implements SlotService {
         return slotRepository.findAllBySlotStatus(SlotStatus.FREE);
     }
 
+    @Synchronized
     public List<Slot> getAvailableSlots(int slotSize) {
         List<Slot> freeSlots = slotRepository.findAllBySlotStatusOrderById(SlotStatus.FREE);
         List<Long> ids = freeSlots.stream().map(Slot::getId).collect(Collectors.toList());

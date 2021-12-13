@@ -1,5 +1,6 @@
 package com.assessment.garage.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParkingEntryDto {
+    @JsonIgnore
     Long id;
     VehicleDto vehicle;
     LocalDateTime entranceTime;
