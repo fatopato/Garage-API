@@ -34,7 +34,7 @@ Request dto examples:
 
 The status info shows the vehicles on the garage and the occupied slots.
 
-Sample requests can be seen on the POSTMAN Collection:
+Sample requests can be seen on the POSTMAN Collection. You can import the POSTMAN collection below:
 https://www.getpostman.com/collections/5fb78cce091d6c292649
 
 
