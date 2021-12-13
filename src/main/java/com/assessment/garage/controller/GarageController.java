@@ -1,16 +1,13 @@
 package com.assessment.garage.controller;
 
-import com.assessment.garage.dto.ParkVehicleRequest;
-import com.assessment.garage.dto.ParkingEntryDto;
+import com.assessment.garage.dto.BaseResponse;
 import com.assessment.garage.dto.VehicleDto;
 import com.assessment.garage.service.GarageService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -22,17 +19,29 @@ public class GarageController {
     GarageService garageService;
 
     @PostMapping("/parkVehicle")
-    public ParkingEntryDto parkVehicle(@RequestBody VehicleDto dto) {
-        return garageService.parkVehicle(dto);
+    public BaseResponse parkVehicle(@RequestBody VehicleDto dto) {
+        try {
+            return new BaseResponse(garageService.parkVehicle(dto), "", HttpStatus.OK);
+        }catch (Exception e) {
+            return new BaseResponse(null, e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/leaveVehicle")
-    public ParkingEntryDto leaveVehicle(@RequestBody VehicleDto dto) {
-        return garageService.leaveVehicle(dto);
+    public BaseResponse leaveVehicle(@RequestBody VehicleDto dto) {
+        try {
+            return new BaseResponse(garageService.leaveVehicle(dto), "", HttpStatus.OK);
+        }catch (Exception e) {
+            return new BaseResponse(null, e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @GetMapping
-    public List<ParkingEntryDto> status() {
-        return garageService.status();
+    @GetMapping(value = "/status")
+    public BaseResponse status() {
+        try {
+            return new BaseResponse(garageService.status(), "", HttpStatus.OK);
+        }catch (Exception e) {
+            return new BaseResponse(null, e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }

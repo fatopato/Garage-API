@@ -12,6 +12,7 @@ public interface SlotService {
     List<Slot> getAll();
     List<Slot> getFreeSlots();
     List<Slot> getAvailableSlots(int slotSize);
+    List<Slot> getOccupiedSlots(int slotSize);
     boolean isSlotFree(Long id);
     Optional<Slot> fullById(Long id);
     Optional<Slot> freeById(Long id);

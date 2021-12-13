@@ -1,10 +1,8 @@
 package com.assessment.garage.entity;
 
-import com.assessment.garage.entity.enums.ParkingProcessType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,11 +20,9 @@ public class ParkingEntry {
     @OneToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
-    @CreatedDate
     @Column(nullable = false)
-    private LocalDateTime processTime;
-    @Column(nullable = false)
-    private ParkingProcessType processType;
-    @OneToMany
+    private LocalDateTime entranceTime;
+    private LocalDateTime leavingTime;
+    @ManyToMany
     private List<Slot> processingSlots;
 }

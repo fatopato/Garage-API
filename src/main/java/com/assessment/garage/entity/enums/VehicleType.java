@@ -19,7 +19,7 @@ public enum VehicleType {
             return new Jeep(plate, color);
         }
     },
-    TRUCK(3) {
+    TRUCK(4) {
         @Override
         public Vehicle getVehicle(String plate, String color) {
             return new Truck(plate, color);

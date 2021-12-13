@@ -1,7 +1,9 @@
 package com.assessment.garage.entity;
 
 import com.assessment.garage.entity.enums.VehicleType;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -9,7 +11,6 @@ import javax.persistence.*;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "VEHICLE")
 public abstract class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

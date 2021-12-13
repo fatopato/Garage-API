@@ -3,11 +3,11 @@ package com.assessment.garage.service;
 import com.assessment.garage.entity.Slot;
 import com.assessment.garage.entity.enums.SlotStatus;
 import com.assessment.garage.repository.SlotRepository;
-import java.util.Collections;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,6 +47,11 @@ public class SlotServiceImpl implements SlotService {
         List<Long> ids = freeSlots.stream().map(Slot::getId).collect(Collectors.toList());
         List<Long> available = this.findAvailable(ids, slotSize);
         return freeSlots.stream().filter(e -> available.contains(e.getId())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Slot> getOccupiedSlots(int slotSize) {
+        return slotRepository.findAllBySlotStatus(SlotStatus.OCCUPIED);
     }
 
     private List<Long> findAvailable(List<Long> ids, int slotSize) {

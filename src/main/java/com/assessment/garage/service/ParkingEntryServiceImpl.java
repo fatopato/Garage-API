@@ -27,12 +27,23 @@ public class ParkingEntryServiceImpl implements ParkingEntryService {
     }
 
     @Override
-    public List<ParkingEntry> getAllByVehiclePlateOrderByProcessTimeDesc(String plate) {
-        return parkingEntryRepository.getAllByVehiclePlateOrderByProcessTimeDesc(plate);
+    public Optional<ParkingEntry> getLastInByPlate(String plate) {
+        return parkingEntryRepository.findTopByVehiclePlateAndLeavingTimeOrderByEntranceTimeDesc(plate, null);
     }
 
     @Override
-    public Optional<ParkingEntry> getLastByPlate(String plate) {
-        return parkingEntryRepository.findTopByVehiclePlateOrderByProcessTimeDesc(plate);
+    public ParkingEntry save(ParkingEntry entry) {
+        return parkingEntryRepository.save(entry);
     }
+
+    @Override
+    public List<ParkingEntry> getAllOccupiedSlotInfo() {
+        return parkingEntryRepository.findAllByLeavingTimeIsNull();
+    }
+
+    @Override
+    public Boolean isCarAlreadyIn(String plate) {
+        return parkingEntryRepository.existsByVehiclePlateAndLeavingTimeIsNull(plate);
+    }
+
 }

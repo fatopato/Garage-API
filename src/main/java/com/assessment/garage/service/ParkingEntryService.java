@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface ParkingEntryService {
     Optional<ParkingEntry> getById(Long id);
     List<ParkingEntry> findAll();
-    List<ParkingEntry> getAllByVehiclePlateOrderByProcessTimeDesc(String plate);
-    Optional<ParkingEntry> getLastByPlate(String plate);
+    Optional<ParkingEntry> getLastInByPlate(String plate);
+    ParkingEntry save(ParkingEntry entry);
+    List<ParkingEntry> getAllOccupiedSlotInfo();
+    Boolean isCarAlreadyIn(String plate);
 }
