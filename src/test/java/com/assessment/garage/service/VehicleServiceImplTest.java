@@ -1,8 +1,6 @@
 package com.assessment.garage.service;
 
-import com.assessment.garage.entity.Car;
-import com.assessment.garage.entity.Jeep;
-import com.assessment.garage.entity.Truck;
+import com.assessment.garage.dto.JeepDto;
 import com.assessment.garage.entity.Vehicle;
 import com.assessment.garage.repository.VehicleRepository;
 import org.junit.Before;
@@ -29,10 +27,10 @@ public class VehicleServiceImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        Mockito.when(vehicleRepository.getById(Mockito.anyLong())).thenReturn(Optional.of(new Truck()));
-        Mockito.when(vehicleRepository.findAll()).thenReturn(Collections.singletonList(new Car()));
-        Mockito.when(vehicleRepository.getByPlate(Mockito.anyString())).thenReturn(Optional.of(new Jeep()));
-        Mockito.when(vehicleRepository.save(Mockito.any())).thenReturn(new Jeep());
+        Mockito.when(vehicleRepository.getById(Mockito.anyLong())).thenReturn(Optional.of(new Vehicle()));
+        Mockito.when(vehicleRepository.findAll()).thenReturn(Collections.singletonList(new Vehicle()));
+        Mockito.when(vehicleRepository.getByPlate(Mockito.anyString())).thenReturn(Optional.of(new Vehicle()));
+        Mockito.when(vehicleRepository.save(Mockito.any())).thenReturn(new Vehicle());
     }
 
     @Test
@@ -55,7 +53,7 @@ public class VehicleServiceImplTest {
 
     @Test
     public void save() {
-        Vehicle vehicle = vehicleService.save(new Jeep());
+        Vehicle vehicle = vehicleService.save(new Vehicle());
         assertNotNull(vehicle);
     }
 }

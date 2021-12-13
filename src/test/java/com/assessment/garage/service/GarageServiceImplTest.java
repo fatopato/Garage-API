@@ -2,9 +2,10 @@ package com.assessment.garage.service;
 
 import com.assessment.garage.dto.ParkingEntryDto;
 import com.assessment.garage.dto.VehicleDto;
-import com.assessment.garage.entity.Car;
+import com.assessment.garage.dto.CarDto;
 import com.assessment.garage.entity.ParkingEntry;
 import com.assessment.garage.entity.Slot;
+import com.assessment.garage.entity.Vehicle;
 import com.assessment.garage.entity.enums.SlotStatus;
 import com.assessment.garage.entity.enums.VehicleType;
 import com.assessment.garage.mapper.CustomMapper;
@@ -44,7 +45,7 @@ public class GarageServiceImplTest {
         Mockito.when(slotService.getAvailableSlots(Mockito.anyInt()))
                 .thenReturn(Collections.singletonList(freeSlot));
         Mockito.when(vehicleService.getByPlate(Mockito.anyString()))
-                .thenReturn(Optional.of(new Car("34as", "blue")));
+                .thenReturn(Optional.of(new Vehicle(1L, "34as", "blue", VehicleType.CAR)));
         Mockito.when(parkingEntryService.isCarAlreadyIn(Mockito.anyString())).thenReturn(false);
         Mockito.when(slotService.save(Mockito.any())).thenReturn(new Slot(1L, SlotStatus.OCCUPIED));
         Mockito.when(parkingEntryService.save(Mockito.any())).thenReturn(new ParkingEntry());
@@ -56,14 +57,14 @@ public class GarageServiceImplTest {
     }
     @Test
     public void parkVehicle() {
-        VehicleDto car = new VehicleDto(1L, "34asd34", "blue", VehicleType.CAR);
+        VehicleDto car = new CarDto( "34asd34", "blue");
         ParkingEntryDto entryDto = garageService.parkVehicle(car);
         Assert.assertNotNull(entryDto);
     }
 
     @Test
     public void leaveVehicle() {
-        VehicleDto car = new VehicleDto(1L, "34asd34", "blue", VehicleType.CAR);
+        VehicleDto car = new CarDto( "34asd34", "blue");
         ParkingEntryDto dto = garageService.leaveVehicle(car);
         Assert.assertNotNull(dto);
     }

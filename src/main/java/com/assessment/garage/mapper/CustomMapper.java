@@ -24,13 +24,13 @@ public class CustomMapper {
     }
 
     public VehicleDto toDto(Vehicle entity) {
-        return new VehicleDto(entity.getId(), entity.getPlate(), entity.getColor(), entity.getVehicleType());
+        VehicleDto vehicleDto = entity.getVehicleType().getVehicle(entity.getPlate(), entity.getColor());
+        vehicleDto.setId(entity.getId());
+        return vehicleDto;
     }
 
     public Vehicle toEntity(VehicleDto dto) {
-        Vehicle vehicle = dto.getVehicleType().getVehicle(dto.getPlate(), dto.getColor());
-        vehicle.setId(dto.getId());
-        return vehicle;
+        return new Vehicle(dto.getId(), dto.getPlate(), dto.getColor(), dto.getVehicleType());
     }
 
     public ParkingEntryDto toDto(ParkingEntry entity) {

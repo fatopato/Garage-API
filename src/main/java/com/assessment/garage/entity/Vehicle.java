@@ -1,17 +1,20 @@
 package com.assessment.garage.entity;
 
 import com.assessment.garage.entity.enums.VehicleType;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
+@Setter
 @ToString
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
-public abstract class Vehicle {
+@Table(name = "VEHICLE")
+public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long id;
@@ -22,23 +25,16 @@ public abstract class Vehicle {
     @Column(nullable = false)
     VehicleType vehicleType;
 
-    public abstract VehicleType getVehicleType();
-
-    protected Vehicle(String plate, String color) {
-        this.plate = plate;
-        this.color = color;
-        this.vehicleType = getVehicleType();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return id != null && Objects.equals(id, vehicle.id);
     }
 
-    public void setPlate(String plate) {
-        this.plate = plate;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

@@ -1,16 +1,11 @@
-package com.assessment.garage.entity;
+package com.assessment.garage.dto;
 
 import com.assessment.garage.entity.enums.VehicleType;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 @NoArgsConstructor
-@Entity
-@Table(name = "VEHICLE")
-public class Truck extends Vehicle {
-    public Truck(String plate, String color) {
+public class TruckDto extends VehicleDto {
+    public TruckDto(String plate, String color) {
         super(plate, color);
     }
 
